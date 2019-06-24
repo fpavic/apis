@@ -16,3 +16,5 @@ config :apis, ApisWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+config :apis, :bcrypt_log_rounds, 4

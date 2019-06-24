@@ -5,7 +5,20 @@ defmodule ApisWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :jwt_authenticated do
+    plug ApisWeb.AuthenticateUser
+    plug ApisWeb.SetUser
+  end
+
   scope "/api", ApisWeb do
     pipe_through :api
+
+    post "/users", UserController, :create
+  end
+
+  scope "/api", ApisWeb do
+    pipe_through [:api, :jwt_authenticated]
+
+    get "/user", CurrentUserController, :show
   end
 end

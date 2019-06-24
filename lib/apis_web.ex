@@ -23,6 +23,7 @@ defmodule ApisWeb do
 
       import Plug.Conn
       import ApisWeb.Gettext
+      import ApisWeb.JWT
       alias ApisWeb.Router.Helpers, as: Routes
     end
   end

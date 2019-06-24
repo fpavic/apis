@@ -8,6 +8,10 @@ defmodule Apis.Accounts do
 
   alias Apis.Accounts.User
 
+  def user_by_email(email) do
+    User |> Repo.get_by(email: email)
+  end
+
   @doc """
   Returns the list of users.
 
@@ -29,7 +33,7 @@ defmodule Apis.Accounts do
   ## Examples
 
       iex> get_user!(123)
-      %User{}
+      %User{})
 
       iex> get_user!(456)
       ** (Ecto.NoResultsError)
