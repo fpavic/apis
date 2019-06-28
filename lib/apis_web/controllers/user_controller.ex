@@ -11,7 +11,7 @@ defmodule ApisWeb.UserController do
          {:ok, jwt} <- generate_jwt(user) do
       conn
       |> put_status(:created)
-      |> render("jwt.json", user: user, jwt: jwt)
+      |> render("show.json", user: user, jwt: jwt)
     end
   end
 end

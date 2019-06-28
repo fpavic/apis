@@ -4,7 +4,7 @@ defmodule ApisWeb.CurrentUserView do
   alias ApisWeb.CurrentUserView
 
   def render("show.json", %{current_user: user}) do
-    %{data: render_one(user, CurrentUserView, "user.json")}
+    %{user: render_one(user, CurrentUserView, "user.json")}
   end
 
   def render("user.json", %{current_user: user}) do

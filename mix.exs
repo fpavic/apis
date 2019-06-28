@@ -43,7 +43,8 @@ defmodule Apis.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:comeonin, "~> 5.1"},
       {:bcrypt_elixir, "~> 2.0"},
-      {:guardian, "~> 1.2.1"}
+      {:guardian, "~> 1.2.1"},
+      {:ex_machina, "~> 2.3", only: :test}
     ]
   end
 

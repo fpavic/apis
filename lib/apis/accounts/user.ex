@@ -4,6 +4,8 @@ defmodule Apis.Accounts.User do
 
   alias Apis.Auth
 
+  @email_regex ~r/^[A-Za-z0-9._%+-+']+@[A-Za-z0-9.-]+\.[A-Za-z]+$/
+
   schema "users" do
     field :email, :string
     field :username, :string
@@ -18,6 +20,7 @@ defmodule Apis.Accounts.User do
     user
     |> cast(attrs, [:email, :username, :password])
     |> validate_required([:email, :username, :password])
+    |> validate_format(:email, @email_regex)
     |> unique_constraint(:email)
     |> unique_constraint(:username)
     |> put_password_hash()

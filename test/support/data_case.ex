@@ -22,6 +22,7 @@ defmodule Apis.DataCase do
       import Ecto.Changeset
       import Ecto.Query
       import Apis.DataCase
+      import Apis.Factory
     end
   end
 
