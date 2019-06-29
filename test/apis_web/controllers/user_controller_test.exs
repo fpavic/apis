@@ -1,4 +1,4 @@
-defmodule ApisWeb.ApisWeb.UserControllerTest do
+defmodule ApisWeb.UserControllerTest do
   use ApisWeb.ConnCase
 
   setup %{conn: build_conn} do

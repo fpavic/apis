@@ -20,6 +20,7 @@ defmodule ApisWeb.ConnCase do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
 
+      import ApisWeb.ConnHelpers
       import ApisWeb.Router.Helpers
       import Apis.Factory
       import Apis.Fixture
