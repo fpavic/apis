@@ -8,6 +8,13 @@ defmodule ApisWeb.FallbackController do
     |> render(:"404")
   end
 
+  def call(conn, {:error, :unauthenticated}) do
+    conn
+    |> put_status(:unprocessable_entity)
+    |> put_view(ApisWeb.ValidationView)
+    |> render("error.json", errors: %{"email or password" => ["is invalid"]})
+  end
+
   def call(conn, {:error, %Ecto.Changeset{} = changeset}) do
     conn
     |> put_status(:unprocessable_entity)

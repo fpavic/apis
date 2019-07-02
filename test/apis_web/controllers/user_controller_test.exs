@@ -45,5 +45,16 @@ defmodule ApisWeb.UserControllerTest do
         ]
       }
     end
+
+		@tag :web
+		test "should not create user but render errors when invalid email format", %{conn: conn} do
+      conn = post conn, user_path(conn, :create), user: build(:user, email: "test@")
+
+      assert json_response(conn, 422)["errors"] == %{
+        "email" => [
+          "has invalid format"
+        ]
+      }
+		end
   end
 end

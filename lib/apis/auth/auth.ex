@@ -13,7 +13,7 @@ defmodule Apis.Auth do
   end
 
   def hash_password(password), do: Bcrypt.hash_pwd_salt(password)
-  def validate_password(password, hash), do: Bcrypt.check_pass(password, hash)
+  def validate_password(user, hash), do: Bcrypt.check_pass(user, hash)
 
   defp user_by_email(email) do
     case Accounts.user_by_email(email) do
@@ -22,9 +22,9 @@ defmodule Apis.Auth do
     end
   end
 
-  defp check_password(%User{password_hash: password_hash} =  user, password) do
-    case validate_password(password, password_hash) do
-      true -> {:ok, user}
+  defp check_password(%User{} =  user, password) do
+    case validate_password(user, password) do
+      {:ok, _} -> {:ok, user}
       _ -> {:error, :unauthenticated}
     end
   end

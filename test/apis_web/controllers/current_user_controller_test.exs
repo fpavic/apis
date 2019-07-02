@@ -18,5 +18,12 @@ defmodule ApisWeb.CurrentUserControllerTest do
         "username" => "testname"
       }
     end
+
+    @tag :web
+    test "should not return user when unauthenticated", %{conn: conn} do
+      conn = get conn, current_user_path(conn, :show)
+
+      assert json_response(conn, 401)["error"] == "unauthenticated"
+    end
   end
 end

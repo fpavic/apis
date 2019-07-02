@@ -21,4 +21,10 @@ defmodule ApisWeb.Router do
 
     get "/user", CurrentUserController, :show
   end
+
+  scope "/api", ApisWeb do
+    pipe_through [:api]
+
+    post "/users/login", SessionController, :create
+  end
 end
