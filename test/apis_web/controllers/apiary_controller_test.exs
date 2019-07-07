@@ -66,5 +66,12 @@ defmodule ApisWeb.ApiaryControllerTest do
         ]
       }
     end
+
+    @tag :web
+    test "should not create apiary when user unauthenticated", %{conn: conn} do
+      conn = post conn, apiary_path(conn, :create), apiary: build(:apiary)
+
+      assert json_response(conn, 401)["error"] == "unauthenticated"
+    end
   end
 end
