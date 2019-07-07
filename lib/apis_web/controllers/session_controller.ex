@@ -4,7 +4,7 @@ defmodule ApisWeb.SessionController do
   action_fallback ApisWeb.FallbackController
 
   alias Apis.Accounts.User
-  alias Apis.{Accounts, Auth}
+  alias Apis.Auth
 
   def create(conn, %{"user" => %{"email" => email, "password" => password}}) do
     with {:ok, %User{} = user} <- Auth.authenticate(email, password),

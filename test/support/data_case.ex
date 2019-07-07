@@ -23,6 +23,7 @@ defmodule Apis.DataCase do
       import Ecto.Query
       import Apis.DataCase
       import Apis.Factory
+      import Apis.Fixture
     end
   end
 

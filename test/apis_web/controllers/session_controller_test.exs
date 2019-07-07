@@ -37,7 +37,7 @@ defmodule ApisWeb.SessionControllerTest do
 
     @tag :web
     test "should not create session but render errors when password does not match", %{conn: conn} do
-      {:ok, user} = fixture(:user)
+      {:ok, _user} = fixture(:user)
 
       conn = post conn, session_path(conn, :create), user: build(:user, password: "invalid")
 

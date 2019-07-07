@@ -44,7 +44,8 @@ defmodule Apis.MixProject do
       {:comeonin, "~> 5.1"},
       {:bcrypt_elixir, "~> 2.0"},
       {:guardian, "~> 1.2.1"},
-      {:ex_machina, "~> 2.3", only: :test}
+      {:ex_machina, "~> 2.3", only: :test},
+      {:geo_postgis, "~> 3.1"}
     ]
   end
 

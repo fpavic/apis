@@ -12,6 +12,8 @@ defmodule Apis.Accounts.User do
     field :password, :string, virtual: true
     field :password_hash, :string
 
+    has_many :apiaries, Apis.Beekeeping.Apiary
+
     timestamps()
   end
 

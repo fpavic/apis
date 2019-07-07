@@ -8,4 +8,12 @@ defmodule Apis.Factory do
       password: "testpass"
     }
   end
+
+  def apiary_factory do
+    %{
+      name: "apiaryname",
+      lng: 19.8846,
+      lat: 44.3573
+    }
+  end
 end

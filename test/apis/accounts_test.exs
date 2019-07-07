@@ -13,7 +13,7 @@ defmodule Apis.AccountsTest do
       assert user.email == "test@test.com"
     end
 
-    @test :integration
+    @tag :integration
     test "should hash password" do
       assert {:ok, %User{} = user} = Accounts.create_user(build(:user))
 

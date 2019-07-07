@@ -20,6 +20,7 @@ defmodule ApisWeb.Router do
     pipe_through [:api, :jwt_authenticated]
 
     get "/user", CurrentUserController, :show
+    resources "/apiaries", ApiaryController, except: [:new, :edit]
   end
 
   scope "/api", ApisWeb do
