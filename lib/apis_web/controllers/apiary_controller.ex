@@ -11,6 +11,12 @@ defmodule ApisWeb.ApiaryController do
     apply(__MODULE__, action_name(conn), args)
   end
 
+  def index(conn, _params, current_user) do
+    apiaries = Beekeeping.list_apiaries(current_user)
+
+    render(conn, "index.json", apiaries: apiaries)
+  end
+
   def create(conn, %{"apiary" => apiary_params}, current_user) do
     with {:ok, %Apiary{} = apiary} <- Beekeeping.create_apiary(current_user, apiary_params) do
       conn

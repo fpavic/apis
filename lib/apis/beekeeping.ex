@@ -13,7 +13,18 @@ defmodule Apis.Beekeeping do
     |> Repo.insert()
   end
 
+  def list_apiaries(%User{} = user) do
+    Apiary
+    |> user_apiaries_query(user)
+    |> Repo.all 
+  end
+
   defp put_user(changeset, user) do
     Ecto.Changeset.put_assoc(changeset, :user, user)
+  end
+
+  defp user_apiaries_query(query, user) do
+    from a in query,
+      where: a.user_id == ^user.id
   end
 end

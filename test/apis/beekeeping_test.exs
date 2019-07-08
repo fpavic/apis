@@ -56,4 +56,21 @@ defmodule Apis.BeekeepingTest do
       assert apiary.lng_lat_point == nil
     end
   end
+
+  describe "list apiaries" do
+    @tag :integration
+    test "should list apiaries of the user" do
+      {:ok, user1} = fixture(:user)
+      {:ok, user2} = fixture(:user, email: "test2@test.com", username: "test2")
+
+      {:ok, apiary1} = fixture(:apiary, user: user1)
+      {:ok, apiary2} = fixture(:apiary, user: user2)
+
+      id1 = apiary1.id
+      id2 = apiary2.id
+
+      assert [%Apiary{id: ^id1}] = Beekeeping.list_apiaries(user1)
+      assert [%Apiary{id: ^id2}] = Beekeeping.list_apiaries(user2)
+    end
+  end
 end
