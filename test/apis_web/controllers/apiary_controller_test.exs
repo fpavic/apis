@@ -5,6 +5,34 @@ defmodule ApisWeb.ApiaryControllerTest do
     {:ok, conn: put_req_header(build_conn, "accept", "application/json")}
   end
 
+  describe "list apiaries" do
+    @tag :web
+    test "should list apiaries that belong to user", %{conn: conn} do
+      {:ok, user} = fixture(:user)
+      {:ok, _apiary} = fixture(:apiary, user: user)
+
+      conn = get authenticated_conn(conn, user), apiary_path(conn, :index)
+      json = json_response(conn, 200)["apiaries"]
+      id = hd(json)["id"]
+
+      assert json == [
+        %{
+          "id" => id,
+          "name" => "apiaryname",
+          "lng" => 19.8846,
+          "lat" => 44.3573
+        }
+      ]
+    end
+
+    @tag :web
+    test "should not list apiaries when user unauthenticated", %{conn: conn} do
+      conn = get conn, apiary_path(conn, :index)
+
+      assert json_response(conn, 401)["error"] == "unauthenticated"
+    end
+  end
+
   describe "create apiary" do
     @tag :web
     test "should create and return apiary when data is valid", %{conn: conn} do
