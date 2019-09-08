@@ -49,30 +49,15 @@ jobs:
           key: v1-build-cache
           paths: "_build"
 
-
       - run:  # special utility that stalls main process until DB is ready
           name: Wait for DB
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
       - run: mix test  # run all tests in project
 
+      - run: mix ecto.create && mix ecto.migrate 
+
       - run: sudo npm install -g newman
-
-      - run: mix ecto.create
-      - run: mix ecto.migrate
-      - run: 
-          name: background server for postman tests
-          command: PORT=4007 mix phx.server
-          background: true
-
-      - run:
-          name: nstat
-          command: netstat -tulpn
-
-      - run:
-          name: Wait for the server
-          command:  wget --retry-connrefused --waitretry=1 --read-timeout=30 --timeout=30 -t 50 http://localhost:4007
-
 
       - run: newman run https://www.getpostman.com/collections/3a89e1c4d8c142fe4efe
 
